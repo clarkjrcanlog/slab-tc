@@ -25,7 +25,7 @@ const RockSelection = () => {
   const moistureContentField = useRef(0);
   const radiusField = useRef(0);
   const heightField = useRef(0);
-  const initialTempField = useRef(0);
+  const initialTempVal = 298.15;
   const finalTempField = useRef(0);
   const timeField = useRef(0);
   const waterDensity = 1000;
@@ -113,9 +113,8 @@ const RockSelection = () => {
   };
 
   const getTemp = () => {
-    const initialTemp = parseFloat(initialTempField.current.value);
     const finalTemp = parseFloat(finalTempField.current.value);
-    const final = finalTemp - initialTemp;
+    const final = finalTemp - initialTempVal;
     setTemp(final);
   };
 
@@ -124,13 +123,13 @@ const RockSelection = () => {
     //const initialTemp = parseFloat(initialTempField.current.value)
     //const finalTemp = parseFloat(finalTempField.current.value)
     const time = parseInt(timeField.current.value);
-    if (time >= 1200) {
+    //if (time >= 1200) {
       const x = mass * temp;
       const heatRate = x / time;
       const rounded = Math.round(heatRate * 100000000) / 100000000;
       setHeatTransferRate(rounded);
-    } else {
-    }
+    //} else {
+    //}
     //const getTemp = finalTemp - initialTemp
 
     //setTemp(getTemp)
@@ -144,16 +143,16 @@ const RockSelection = () => {
     getWeight();
     getTemp();
     getHeatTransferRate();
-    const time = parseInt(timeField.current.value);
-    if (time >= 1200){
+    // const time = parseInt(timeField.current.value);
+    // if (time >= 1200){
       let x = heatTransferRate * height;
       let y = area * temp;
       const getThermal = x / y;
       const rounded = Math.round(getThermal * 1000000000) / 1000000000;
       setThermalCon(rounded);
-    }else{
-      window.alert('Minimum time is 1200 secs to calculate Thermal Conductivity')
-    }
+    // }else{
+    //   window.alert('Minimum time is 1200 secs to calculate Thermal Conductivity')
+    // }
     //9digits
   };
 
@@ -172,7 +171,7 @@ const RockSelection = () => {
     moistureContentField.current.value = "";
     radiusField.current.value = "";
     heightField.current.value = "";
-    initialTempField.current.value = "";
+    //initialTempField.current.value = "";
     finalTempField.current.value = "";
     timeField.current.value = "";
   };
@@ -287,10 +286,12 @@ const RockSelection = () => {
           <Col md="3">
             <Form.Label>Initial Temperature(K)</Form.Label>
             <Form.Control
-              type="number"
+              //type="number"
               name="initialTemp"
-              ref={initialTempField}
-              disabled={weight == 0}
+              value={initialTempVal.toString()}
+              readOnly
+              //ref={initialTempField}
+              //disabled={weight == 0}
             />
             <Form.Label>Final Temperature(K)</Form.Label>
             <Form.Control
