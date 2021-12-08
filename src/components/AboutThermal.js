@@ -42,8 +42,7 @@ const AboutThermal = () => {
         <Row>
           <h6>
             <i>
-              ∆T= Temperature difference (K) (Final Temperature – Initial
-              Temperature)
+              T= Temperature (K)
             </i>
           </h6>
         </Row>

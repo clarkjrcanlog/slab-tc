@@ -33,7 +33,7 @@ const About = () => {
             <strong>
               <i>
                 (Note: Porosity and moisture content should be in decimal
-                number, and the best minimum time is 1200 seconds.)
+                number)
               </i>
             </strong>
           </p>

@@ -19,14 +19,14 @@ const RockSelection = () => {
   const [heatTransferRate, setHeatTransferRate] = useState(0);
   const [area, setArea] = useState(0);
   const [height, setHeight] = useState(0);
-  const [temp, setTemp] = useState(0);
+  //const [temp, setTemp] = useState(0);
   const [thermalCon, setThermalCon] = useState(0);
   const porosityField = useRef(0);
   const moistureContentField = useRef(0);
   const radiusField = useRef(0);
   const heightField = useRef(0);
-  const initialTempVal = 298.15;
-  const finalTempField = useRef(0);
+  const tempValue = 298.15;
+  //const finalTempField = useRef(0);
   const timeField = useRef(0);
   const waterDensity = 1000;
   const stones = [
@@ -112,11 +112,11 @@ const RockSelection = () => {
     //8 digits
   };
 
-  const getTemp = () => {
-    const finalTemp = parseFloat(finalTempField.current.value);
-    const final = finalTemp - initialTempVal;
-    setTemp(final);
-  };
+  // const getTemp = () => {
+  //   const finalTemp = parseFloat(finalTempField.current.value);
+  //   const final = finalTemp - initialTempVal;
+  //   setTemp(final);
+  // };
 
   const getHeatTransferRate = () => {
     const mass = weight * selectStone?.specificHeat;
@@ -124,7 +124,7 @@ const RockSelection = () => {
     //const finalTemp = parseFloat(finalTempField.current.value)
     const time = parseInt(timeField.current.value);
     //if (time >= 1200) {
-      const x = mass * temp;
+      const x = mass * tempValue;
       const heatRate = x / time;
       const rounded = Math.round(heatRate * 100000000) / 100000000;
       setHeatTransferRate(rounded);
@@ -141,12 +141,12 @@ const RockSelection = () => {
     getDryDensity();
     getBulkDensity();
     getWeight();
-    getTemp();
+    //getTemp();
     getHeatTransferRate();
     // const time = parseInt(timeField.current.value);
     // if (time >= 1200){
       let x = heatTransferRate * height;
-      let y = area * temp;
+      let y = area * tempValue;
       const getThermal = x / y;
       const rounded = Math.round(getThermal * 1000000000) / 1000000000;
       setThermalCon(rounded);
@@ -165,14 +165,14 @@ const RockSelection = () => {
     setHeatTransferRate(0);
     setArea(0);
     setHeight(0);
-    setTemp(0);
+    //setTemp(0);
     setThermalCon(0);
     porosityField.current.value = "";
     moistureContentField.current.value = "";
     radiusField.current.value = "";
     heightField.current.value = "";
     //initialTempField.current.value = "";
-    finalTempField.current.value = "";
+    //finalTempField.current.value = "";
     timeField.current.value = "";
   };
 
@@ -284,30 +284,30 @@ const RockSelection = () => {
       <div className="secondRow">
         <Row>
           <Col md="3">
-            <Form.Label>Initial Temperature(K)</Form.Label>
+            <Form.Label>Temperature(K)</Form.Label>
             <Form.Control
               //type="number"
-              name="initialTemp"
-              value={initialTempVal.toString()}
+              name="Temperature"
+              value={tempValue.toString()}
               readOnly
               //ref={initialTempField}
               //disabled={weight == 0}
             />
-            <Form.Label>Final Temperature(K)</Form.Label>
+            {/* <Form.Label>Final Temperature(K)</Form.Label>
             <Form.Control
               type="number"
               name="finalTemp"
               ref={finalTempField}
               disabled={weight == 0}
               onChange={getTemp}
-            />
-            <Form.Label>Time(min. 1200secs)</Form.Label>
+            /> */}
+            <Form.Label>Time</Form.Label>
             <Form.Control
               type="number"
               name="time"
               ref={timeField}
               onChange={getHeatTransferRate}
-              disabled={temp == 0}
+              disabled={weight == 0}
             />
           </Col>
           <Col md="3">
